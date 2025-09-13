@@ -25,6 +25,114 @@ Create a Report PromptEvaluation of 2024 Prompting Tools Across Diverse AI Platf
 #  Evaluation of 2024 Prompting Tools Across Diverse AI Platforms  
 
 ---
+## Executive Summary
+
+This report compares prompting tools and prompt engineering experiences across five major AI platforms in 2024–2025: **OpenAI (ChatGPT), Anthropic (Claude), Google (Bard / Gemini), Cohere (Command family), and Meta (Llama family)**.  
+
+The evaluation focuses on a single concrete use case—**summarizing technical documentation**—and measures performance on:  
+
+- Accuracy  
+- Faithfulness (hallucination rate)  
+- Instruction-following  
+- Latency  
+- Prompt ergonomics (system prompts, templates, prompt helpers)  
+- User experience (consoles, template support, integrations)  
+
+### Key Findings
+- All platforms offer strong instruction-following but vary in hallucination tendencies and citation behavior.  
+- Tooling differences (system messages, prompt templates, prompt generators) meaningfully impact developer productivity: **Anthropic** and **Cohere** provide helpful template tooling; **OpenAI** and **Google** emphasize system messages and function-calling integrations.  
+- **Meta’s Llama** family is highly configurable for research and on-prem deployments; **Cohere Command** shines on long-context, retrieval-augmented setups.  
+
+---
+
+## Table of Contents
+1. Introduction & Goals  
+2. Methodology  
+3. Platform Overviews  
+4. Experimental Setup (use case & dataset)  
+5. Quantitative Results (tables & charts)  
+6. Qualitative Analysis & UX  
+7. Strengths, Weaknesses, and Recommendations  
+8. Sample Prompts & Prompt-Templates  
+9. Visual Appendix (images, charts, sample responses)  
+10. Conclusion & Next Steps  
+
+---
+
+## 1. Introduction & Goals
+
+**Objective:** Within a consistent technical summarization task, evaluate how prompting tools on each platform affect output quality and developer experience.  
+
+**Scope:** ChatGPT (OpenAI), Claude (Anthropic), Bard / Gemini (Google), Cohere Command R-series, Meta Llama (Llama 3/4).  
+
+Focus is on **developer-facing prompting tools** (system messages, templates, function calling, prompt generators, console UX) rather than raw model benchmarks alone.  
+
+---
+
+## 2. Methodology
+
+### Use case
+Summarize sections of technical documentation (API docs, architecture notes) into 3 levels:  
+- **TL;DR** (1–2 sentences)  
+- **Short summary** (3–4 bullet points)  
+- **Actionable checklist** (5 items)  
+
+### Dataset
+30 medium-length technical docs (300–800 words) across cloud SDKs, deployment guides, API references.  
+
+### Metrics
+- **ROUGE-L**: similarity with human reference summary  
+- **Faithfulness score**: % factual claims verifiable in source  
+- **Hallucination count**: avg. claims not present in source  
+- **Instruction-following rating**: 1–5 scale (human raters)  
+- **Latency**: median response time  
+- **Prompt ergonomics score**: 0–10 composite (templates, system messages, tooling, UX)  
+
+### Controls
+- Same instructions across platforms (role-based vs inline adapted).  
+- Long-context endpoints (e.g., Cohere Command R 128k) when available.  
+- Retrieval augmentation (RAG) disabled for base runs.  
+
+---
+
+## 3. Platform Overviews
+
+### OpenAI — ChatGPT
+- System messages + function calling are first-class.  
+- Console UX is simple; API supports prompt templates.  
+
+### Anthropic — Claude
+- Built-in **prompt-generator** tooling + templates.  
+- Strong integrations (e.g., Canva), enterprise memory features.  
+
+### Google — Bard (Gemini)
+- Focus on workspace integrations.  
+- Prompting guidance for short/long contexts.  
+
+### Cohere — Command R
+- Optimized for **long-context (up to 128k tokens)**.  
+- Strong RAG support, enterprise-oriented.  
+
+### Meta — Llama (3/4)
+- Open-source, configurable for research and on-prem.  
+- Requires more engineering to reach production ergonomics.  
+
+---
+
+## 4. Experimental Setup
+
+**Prompt (portable version):**
+
+```text
+System: You are an expert software engineer. Read the following technical text and produce three outputs:
+1) TL;DR (1 sentence)
+2) Short summary as 3 bullet points
+3) Actionable checklist of 5 items
+
+Text: <INSERT DOCUMENT TEXT>
+
+Output format: JSON object with keys "tldr","bullets","checklist".
+```
 
 ##  1. Introduction  
 
